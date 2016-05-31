@@ -24,7 +24,7 @@ function htmlToElement(rawHtml, opts, done) {
 
       if (node.type == 'text') {
         return (
-          <Text key={index} style={parent ? opts.styles[parent.name] : null}>
+          <Text key={index} style={parent ? opts.styles[parent.name] : null} allowFontScaling={opts.allowFontScaling}>
             {entities.decodeHTML(node.data)}
           </Text>
         )
@@ -37,13 +37,13 @@ function htmlToElement(rawHtml, opts, done) {
         }
 
         return (
-          <Text key={index} onPress={linkPressHandler}>
+          <Text key={index} onPress={linkPressHandler} allowFontScaling={opts.allowFontScaling}>
             {node.name == 'pre' ? LINE_BREAK : null}
             {node.name == 'li' ? BULLET : null}
             {domToElement(node.children, node)}
             {node.name == 'br' || node.name == 'li' ? LINE_BREAK : null}
             {node.name == 'p' && index < list.length - 1 ? PARAGRAPH_BREAK : null}
-            {node.name == 'h1' || node.name == 'h2' || node.name == 'h3' || node.name == 'h4' || node.name == 'h5' ? LINE_BREAK : null}
+            {node.name == 'h1' || node.name == 'h2' || node.name == 'h3' || node.name == 'h4' || node.name == 'h5' ? PARAGRAPH_BREAK : null}
           </Text>
         )
       }
