@@ -15,6 +15,7 @@ var HTMLView = React.createClass({
     onLinkPress: React.PropTypes.func,
     onError: React.PropTypes.func,
     renderNode: React.PropTypes.func,
+	allowFontScaling: React.PropTypes.bool
   },
 
   getDefaultProps() {
@@ -63,7 +64,7 @@ var HTMLView = React.createClass({
 
   render() {
     if (this.state.element) {
-      return <Text children={this.state.element} />
+      return <Text children={this.state.element} allowFontScaling={this.props.allowFontScaling}/>
     }
     return <Text />
   },
